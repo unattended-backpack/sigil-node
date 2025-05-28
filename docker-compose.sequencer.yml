@@ -1,0 +1,37 @@
+# Configuration for running a full Sigil sequencer in the event the centralized
+# Sigil sequencer is down.
+
+services:
+  op-node:
+    entrypoint: /scripts/sequencer/start-op-geth.sh
+
+  op-reth:
+    entrypoint: /scripts/sequencer/start-op-reth.sh
+
+  op-batcher:
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-batcher:v1.13.1
+    restart: on-failure
+    stop_grace_period: 5m
+    entrypoint: /scripts/sequencer/start-op-batcher.sh
+    env_file:
+      - .env
+    volumes:
+      - ./scripts/:/scripts
+    ports:
+      - ${PORT__OP_BATCHER_HTTP: -8548}:8548
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  op-succinct-validity:
+    image: # TODO
+    restart: on-failure
+    stop_grace_period: 5m
+    entrypoint: /scripts/sequencer/start-op-succinct-validity.sh
+    env_file:
+      - .env
+    volumes:
+      - ./scripts/:/scripts
+    ports:
+      - ${PORT__OP_SUCCINCT_VALIDITY_HTTP: -3001}:3001 
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

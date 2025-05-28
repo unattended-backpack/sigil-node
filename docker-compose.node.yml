@@ -1,0 +1,7 @@
+# Configuration for running a Sigil node for rpc access
+services:
+  op-node:
+    entrypoint: /scripts/node/start-op-geth.sh
+
+  op-reth:
+    entrypoint: /scripts/node/start-op-reth.sh

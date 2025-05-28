@@ -1,0 +1,57 @@
+# Base configuration.  Not meant to be used by itself, use either
+# docker-compose.node.yml or docker-compose.sequencer.yml as overrides
+
+version: "1.0"
+services:
+  op-node: 
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.13.3
+    restart: unless-stopped
+    stop_grace_period: 5m
+    env_file:
+      - .env
+    volumes:
+      - ./envs/config:/chainconfig
+      - ./scripts/:/scripts
+      - shared:/shared
+    ports:
+      - ${PORT__OP_NODE_P2P:-9003}:9003/udp
+      - ${PORT__OP_NODE_P2P:-9003}:9003/tcp
+      - ${PORT__OP_NODE_HTTP:-9545}:9545
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  op-reth: 
+    image: ghcr.io/paradigmxyz/op-reth:v1.4.3
+    restart: unless-stopped
+    stop_grace_period: 5m
+    env_file:
+      - .env
+    volumes:
+      - ./config:/chainconfig
+      - ./scripts/:/scripts
+      - shared:/shared
+      - op-reth:/op-reth
+    ports:
+      - ${PORT__OP_RETH_HTTP:-9993}:8545
+      - ${PORT__OP_RETH_WS:-9994}:8546
+      - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/udp
+      - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/tcp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # initializes datadir and jwt.txt, then writes INITIALIZED.txt
+  initialize:
+    build:
+      context: ./docker/dockerfiles
+      dockerfile: Dockerfile
+    entrypoint: /scripts/initialize.sh
+    env_file:
+      - .env
+    volumes:
+      - ./scripts/:/scripts
+      - shared:/shared
+      - op-reth:/op-reth
+
+volumes:
+  op-reth:
+  shared: # for storing jwt.txt and INITIALIZED.txt
