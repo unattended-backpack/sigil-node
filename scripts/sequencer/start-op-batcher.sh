@@ -1,10 +1,16 @@
 #!/bin/bash
 source .env
+
+echo "Waiting for node to initialize..."
+while [ ! -f /shared/initialized.txt ]; do
+	sleep 1
+done
+
 ./op-batcher \
 	--private-key=$GS_BATCHER_PRIVATE_KEY \
 	--l1-eth-rpc=$L1_RPC_URL \
-	--l2-eth-rpc=http://localhost:8545 \
-	--rollup-rpc=http://localhost:9545 \
+	--l2-eth-rpc=${L2_RPC:-http://op-reth:8545} \
+	--rollup-rpc=${ROLLUP_RPC:-http://op-node:9545} \
 	--batch-type=1 \
 	--poll-interval=4s \
 	--sub-safety-margin=6 \

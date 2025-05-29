@@ -32,8 +32,8 @@ services:
       - shared:/shared
       - op-reth:/op-reth
     ports:
-      - ${PORT__OP_RETH_HTTP:-9993}:8545
-      - ${PORT__OP_RETH_WS:-9994}:8546
+      - ${PORT__OP_RETH_HTTP:-8545}:8545
+      - ${PORT__OP_RETH_WS:-8546}:8546
       - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/udp
       - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/tcp
     extra_hosts:
@@ -53,5 +53,5 @@ services:
       - op-reth:/op-reth
 
 volumes:
-  op-reth:
+  op-reth: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt

@@ -23,10 +23,9 @@ services:
       - "host.docker.internal:host-gateway"
 
   op-succinct-validity:
-    image: # TODO
-    restart: on-failure
-    stop_grace_period: 5m
-    entrypoint: /scripts/sequencer/start-op-succinct-validity.sh
+    # Succinct doesn't have a public image repository so we built our own for now.
+    # You're welcome to build your own and use it here instead github.com/succinctlabs/op-succinct/
+    image: jossduff/op-succinct-validity:latest
     env_file:
       - .env
     volumes:
@@ -35,3 +34,26 @@ services:
       - ${PORT__OP_SUCCINCT_VALIDITY_HTTP: -3001}:3001 
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      - DATABASE_URL=postgres://op-succinct@postgres:5432/op-succinct
+      - RUST_LOG_STYLE=always
+      - RUST_LOG=info
+      - RUST_BACKTRACE=1
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  # Used to store proof requests for op-succinct-validity
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: op-succinct
+      POSTGRES_DB: op-succinct
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
