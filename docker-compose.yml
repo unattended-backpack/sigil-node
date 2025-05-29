@@ -1,7 +1,6 @@
 # Base configuration.  Not meant to be used by itself, use either
 # docker-compose.node.yml or docker-compose.sequencer.yml as overrides
 
-version: "1.0"
 services:
   op-node: 
     image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.13.3
@@ -10,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./envs/config:/chainconfig
+      - ./config:/chainconfig
       - ./scripts/:/scripts
       - shared:/shared
     ports:
@@ -19,6 +18,9 @@ services:
       - ${PORT__OP_NODE_HTTP:-9545}:9545
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      initialize:
+        condition: service_completed_successfully
 
   op-reth: 
     image: ghcr.io/paradigmxyz/op-reth:v1.4.3
@@ -38,12 +40,13 @@ services:
       - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/tcp
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      initialize:
+        condition: service_completed_successfully
 
   # initializes datadir and jwt.txt, then writes INITIALIZED.txt
   initialize:
-    build:
-      context: ./docker/dockerfiles
-      dockerfile: Dockerfile
+    image: alpine:latest
     entrypoint: /scripts/initialize.sh
     env_file:
       - .env
@@ -51,6 +54,7 @@ services:
       - ./scripts/:/scripts
       - shared:/shared
       - op-reth:/op-reth
+    restart: "no"
 
 volumes:
   op-reth: # chain data

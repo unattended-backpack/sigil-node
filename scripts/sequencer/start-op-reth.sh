@@ -6,7 +6,7 @@ while [ ! -f /shared/initialized.txt ]; do
 done
 
 # init datadir
-./op-reth init --datadir datadir --chain chainconfig/genesis.json
+./op-reth init --datadir /datadir --chain chainconfig/genesis.json
 
 ./op-reth node \
 	--datadir=/datadir \

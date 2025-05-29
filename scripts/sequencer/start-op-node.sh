@@ -1,5 +1,4 @@
 #!/bin/bash
-source .env
 
 echo "Waiting for node to initialize..."
 while [ ! -f /shared/initialized.txt ]; do
