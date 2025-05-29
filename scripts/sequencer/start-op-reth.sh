@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Waiting for node to initialize..."
 while [ ! -f /shared/initialized.txt ]; do
@@ -6,9 +6,9 @@ while [ ! -f /shared/initialized.txt ]; do
 done
 
 # init datadir
-./op-reth init --datadir /datadir --chain chainconfig/genesis.json
+op-reth init --datadir /datadir --chain chainconfig/genesis.json
 
-./op-reth node \
+op-reth node \
 	--datadir=/datadir \
 	--http \
 	--http.corsdomain="*" \

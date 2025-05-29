@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Waiting for node to initialize..."
 while [ ! -f /shared/initialized.txt ]; do
 	sleep 1
 done
 
-./op-batcher \
+op-batcher \
 	--private-key=$GS_BATCHER_PRIVATE_KEY \
 	--l1-eth-rpc=$L1_RPC_URL \
 	--l2-eth-rpc=${L2_RPC:-http://op-reth:8545} \

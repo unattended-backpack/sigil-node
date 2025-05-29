@@ -10,7 +10,7 @@ services:
       - .env
     volumes:
       - ./config:/chainconfig
-      - ./scripts/:/scripts
+      - ./scripts:/scripts
       - shared:/shared
     ports:
       - ${PORT__OP_NODE_P2P:-9003}:9003/udp
@@ -30,9 +30,9 @@ services:
       - .env
     volumes:
       - ./config:/chainconfig
-      - ./scripts/:/scripts
+      - ./scripts:/scripts
       - shared:/shared
-      - op-reth:/op-reth
+      - op-reth-data:/op-reth-data
     ports:
       - ${PORT__OP_RETH_HTTP:-8545}:8545
       - ${PORT__OP_RETH_WS:-8546}:8546
@@ -47,15 +47,15 @@ services:
   # initializes datadir and jwt.txt, then writes INITIALIZED.txt
   initialize:
     image: alpine:latest
-    entrypoint: /scripts/initialize.sh
+    command: /bin/sh -c "apk add --no-cache openssl && /scripts/initialize.sh"
     env_file:
       - .env
     volumes:
-      - ./scripts/:/scripts
+      - ./scripts:/scripts
       - shared:/shared
-      - op-reth:/op-reth
+      - op-reth-data:/op-reth-data
     restart: "no"
 
 volumes:
-  op-reth: # chain data
+  op-reth-data: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt

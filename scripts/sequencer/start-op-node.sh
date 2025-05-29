@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Waiting for node to initialize..."
 while [ ! -f /shared/initialized.txt ]; do
 	sleep 1
 done
 
-./op-node \
+op-node \
 	--l1=$L1_RPC_URL \
 	--l2=http://op-reth:8551 \
 	--rpc.addr=0.0.0.0 \
