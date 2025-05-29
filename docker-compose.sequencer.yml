@@ -9,7 +9,7 @@ services:
 
   op-batcher:
     image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-batcher:v1.13.1
-    restart: on-failure
+    restart: unless-stopped
     stop_grace_period: 5m
     entrypoint: /scripts/sequencer/start-op-batcher.sh
     env_file:
@@ -26,13 +26,15 @@ services:
       - op-node
 
   op-succinct-validity:
-    # Succinct doesn't have a public image repository so we built our own for now.
+    # Succinct doesn't have a public image repository so we hosted our own image.
     # You're welcome to build your own and use it here instead: github.com/succinctlabs/op-succinct/tree/v2.1.0
     image: jossduff/op-succinct-validity:latest
+    entrypoint: /scripts/sequencer/start-op-succinct-validity.sh
     env_file:
       - .env
     volumes:
       - ./scripts:/scripts
+      - validity-tmp:/tmp
     ports:
       - ${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:3001 
     extra_hosts:
@@ -42,7 +44,8 @@ services:
       - L1_BEACON_RPC=${L1_BEACON_RPC_URL}
       - L2_RPC=http://op-reth:8545
       - L2_NODE_RPC=http://op-node:9545
-      - DATABASE_URL=postgres://op-succinct@postgres:5432/op-succinct
+      # use the OP_SUCCINCT_DATABASE_URL if provided, otherwise use the local postgres db container
+      - DATABASE_URL=${OP_SUCCINCT_VALIDITY_DATABASE_URL:-postgres://op-succinct@postgres:5432/op-succinct}
       - RUST_LOG_STYLE=always
       - RUST_LOG=info
       - RUST_BACKTRACE=1
@@ -66,3 +69,4 @@ services:
 
 volumes:
   postgres-data:
+  validity-tmp:
