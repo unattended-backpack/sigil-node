@@ -23,4 +23,5 @@ op-reth node \
 	--ws.api=web3,debug,eth,txpool,miner,net,trace,txpool,rpc,reth \
 	--authrpc.addr=0.0.0.0 \
 	--authrpc.port=8551 \
-	--authrpc.jwtsecret=/shared/jwt.txt
+	--authrpc.jwtsecret=/shared/jwt.txt \
+	--rpc.eth-proof-window 30000 # roughly 1 day worth of blocks @ 4 seconds / block
