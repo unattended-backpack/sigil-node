@@ -14,6 +14,7 @@ op-reth node \
 	--http.corsdomain="*" \
 	--http.addr=0.0.0.0 \
 	--http.api=web3,debug,eth,txpool,miner,net,trace,txpool,rpc,reth \
+	--http.port=8545 \
 	--ws \
 	--ws.addr=0.0.0.0 \
 	--chain=/chainconfig/genesis.json \

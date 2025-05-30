@@ -13,9 +13,12 @@ while ! curl -sf http://op-node:9545 >/dev/null 2>&1; do
 	sleep 5
 done
 
-# Check if op-reth is ready first
+# Check if op-reth is ready - it requires POST
 echo "Waiting for op-reth to be ready..."
-while ! curl -sf http://op-reth:8545 >/dev/null 2>&1; do
+while ! curl -sf -X POST http://op-reth:8545 \
+	-H "Content-Type: application/json" \
+	-d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' \
+	>/dev/null 2>&1; do
 	echo "op-reth is not ready yet, waiting..."
 	sleep 5
 done

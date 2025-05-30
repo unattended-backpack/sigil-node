@@ -34,6 +34,9 @@ services:
       - .env
     volumes:
       - ./scripts:/scripts
+      # op-succinct-validity expects the up-to-date `configs/51611.json` at this location 
+      # in the container
+      - ./config:/app/configs
       - validity-tmp:/tmp
     ports:
       - ${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:3001 
