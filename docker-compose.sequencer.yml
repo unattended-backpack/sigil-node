@@ -27,8 +27,8 @@ services:
 
   op-succinct-validity:
     # Succinct doesn't have a public image repository so we hosted our own image.
-    # You're welcome to build your own and use it here instead: github.com/succinctlabs/op-succinct/tree/v2.1.0
-    image: jossduff/op-succinct-validity:latest
+    # You're welcome to build your own and use it here instead: github.com/succinctlabs/op-succinct/tree/v2.3.0
+    image: jossduff/op-succinct-validity:v2.3.0
     entrypoint: /scripts/sequencer/start-op-succinct-validity.sh
     env_file:
       - .env
