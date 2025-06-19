@@ -23,8 +23,8 @@ services:
       initialize:
         condition: service_completed_successfully
 
-  op-reth: 
-    image: ghcr.io/paradigmxyz/op-reth:v1.4.3
+  op-geth: 
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101511.0
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
@@ -33,12 +33,12 @@ services:
       - ./config:/chainconfig
       - ./scripts:/scripts
       - shared:/shared
-      - op-reth-data:/op-reth-data
+      - datadir:/datadir
     ports:
-      - ${PORT__OP_RETH_HTTP:-8545}:8545
-      - ${PORT__OP_RETH_WS:-8546}:8546
-      - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/udp
-      - ${PORT__OP_RETH_P2P:-39393}:${PORT__OP_RETH_P2P:-39393}/tcp
+      - ${PORT__OP_GETH_HTTP:-8545}:8545
+      - ${PORT__OP_GETH_WS:-8546}:8546
+      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/udp
+      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/tcp
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -54,10 +54,10 @@ services:
     volumes:
       - ./scripts:/scripts
       - shared:/shared
-      - op-reth-data:/op-reth-data
+      - datadir:/datadir
     restart: "no"
 
 volumes:
-  op-reth-data: # chain data
+  datadir: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt
   safe-db: # for op-node

@@ -4,8 +4,8 @@ services:
   op-node:
     entrypoint: /scripts/sequencer/start-op-node.sh
 
-  op-reth:
-    entrypoint: /scripts/sequencer/start-op-reth.sh
+  op-geth:
+    entrypoint: /scripts/sequencer/start-op-geth.sh
 
   op-batcher:
     image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-batcher:v1.13.1
@@ -22,7 +22,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - op-reth
+      - op-geth
       - op-node
 
   op-succinct-validity:
@@ -45,7 +45,7 @@ services:
     environment:
       - L1_RPC=${L1_RPC_URL}
       - L1_BEACON_RPC=${L1_BEACON_RPC_URL}
-      - L2_RPC=http://op-reth:8545
+      - L2_RPC=http://op-geth:8545
       - L2_NODE_RPC=http://op-node:9545
       # use the OP_SUCCINCT_DATABASE_URL if provided, otherwise use the local postgres db container
       - DATABASE_URL=${OP_SUCCINCT_VALIDITY_DATABASE_URL:-postgres://op-succinct@postgres:5432/op-succinct}
@@ -54,7 +54,7 @@ services:
       - RUST_BACKTRACE=1
     depends_on:
       - postgres
-      - op-reth
+      - op-geth
       - op-node
     restart: unless-stopped
 

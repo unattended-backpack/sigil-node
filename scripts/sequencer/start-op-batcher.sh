@@ -8,7 +8,7 @@ done
 op-batcher \
 	--private-key=$GS_BATCHER_PRIVATE_KEY \
 	--l1-eth-rpc=$L1_RPC_URL \
-	--l2-eth-rpc=${L2_RPC:-http://op-reth:8545} \
+	--l2-eth-rpc=${L2_RPC:-http://op-geth:8545} \
 	--rollup-rpc=${ROLLUP_RPC:-http://op-node:9545} \
 	--batch-type=1 \
 	--poll-interval=4s \
