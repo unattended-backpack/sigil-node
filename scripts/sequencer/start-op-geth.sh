@@ -8,7 +8,7 @@ done
 #init datdir
 geth init --state.scheme=hash --datadir=/datadir chainconfig/genesis.json
 
-./op-geth/build/bin/geth \
+geth \
 	--datadir /datadir \
 	--http \
 	--http.corsdomain="*" \
