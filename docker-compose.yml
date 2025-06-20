@@ -33,7 +33,7 @@ services:
       - ./config:/chainconfig
       - ./scripts:/scripts
       - shared:/shared
-      - op-reth-data:/op-reth-data
+      - datadir:/datadir
     ports:
       - ${PORT__OP_RETH_HTTP:-8545}:8545
       - ${PORT__OP_RETH_WS:-8546}:8546
@@ -54,10 +54,10 @@ services:
     volumes:
       - ./scripts:/scripts
       - shared:/shared
-      - op-reth-data:/op-reth-data
+      - datadir:/datadir
     restart: "no"
 
 volumes:
-  op-reth-data: # chain data
+  datadir: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt
   safe-db: # for op-node
