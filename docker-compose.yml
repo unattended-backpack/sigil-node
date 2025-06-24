@@ -12,7 +12,7 @@ services:
       - ./config:/chainconfig
       - ./scripts:/scripts
       - shared:/shared
-      - safe-db:/safe-db
+      - safedb:/safedb
     ports:
       - ${PORT__OP_NODE_P2P:-9003}:9003/udp
       - ${PORT__OP_NODE_P2P:-9003}:9003/tcp
@@ -60,4 +60,4 @@ services:
 volumes:
   datadir: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt
-  safe-db: # for op-node
+  safedb: # for op-node
