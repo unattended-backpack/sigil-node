@@ -32,11 +32,7 @@ logs-sequencer:
 logs-node:
 	docker compose -f docker-compose.yml -f docker-compose.node.yml logs -f
 
-# Show status
-status:
-	docker compose -f docker-compose.yml -f docker-compose.sequencer.yml ps
-
-# Clean everything (including volumes)
+# Clean everything (WARNING: including volumes!  You will lose all chain-data and have to resync)
 clean:
 	docker compose -f docker-compose.yml -f docker-compose.sequencer.yml down -v
 	docker compose -f docker-compose.yml -f docker-compose.node.yml down -v
