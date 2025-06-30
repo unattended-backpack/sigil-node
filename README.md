@@ -28,6 +28,7 @@ make node
 
 # Stop any time with
 make stop-node
+# note: some processes like op-node can take awhile (~5 mins) to cleanly shut down
 
 # see Makefile for more commands
 ```
@@ -67,6 +68,7 @@ make sequencer
 
 # Stop any time with
 make stop-sequencer
+# note: some processes like op-node can take awhile (~5 mins) to cleanly shut down
 
 # see Makefile for more commands
 ```
