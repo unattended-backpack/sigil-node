@@ -13,8 +13,7 @@ op-node \
 	--l1.beacon=$L1_BEACON_RPC_URL \
 	--l2.enginekind=geth \
 	--sequencer.enabled \
-	--sequencer.l1-confs=5 \
-	--verifier.l1-confs=4 \
+	--verifier.l1-confs=64 \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
 	--p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
