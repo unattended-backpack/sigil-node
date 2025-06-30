@@ -1,5 +1,7 @@
 # sigil-node
 
+Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
+
 # I want to run an rpc node
 
 Will need to register for google container registry (get mad at optimism not us)
@@ -23,4 +25,3 @@ You will also need a Succinct prover network rpc.  You can either use Succinct's
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.sequencer.yml up
 ```
-
