@@ -21,10 +21,15 @@ op-node, op-geth
 
 ```bash
 cp .env.example .env
-# fill out relevant .env variables
-make node
+# then, fill out relevant .env variables
+
 # have fun with your rpc node!
+make node
+
+# Stop any time with
 make stop-node
+
+# see Makefile for more commands
 ```
 
 This will run an rpc node for read and write access to Sigil L2.  Transactions sent to this node will get forwarded to the `SIGIL_SEQUENCER` to then be executed.  The `op-geth` execution node allows http access through port `8545` by default.  Port overrides available in the `.env` (optional section at the bottom).
@@ -51,12 +56,19 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 
 op-node, op-geth, op-batcher, op-succinct-validity (proposer)
 
+## Starting and stopping
+
 ```bash
 cp .env.example .env
-# fill out relevant .env variables
+# then, fill out relevant .env variables
+
+# Prove transactions and safely return funds to the L1!
 make sequencer
-# Prove a transaction and safely return funds to the L1!
+
+# Stop any time with
 make stop-sequencer
+
+# see Makefile for more commands
 ```
 
 This will run a node with http access through port `8545` by default.
