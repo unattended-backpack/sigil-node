@@ -2,9 +2,22 @@
 
 Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
 
+This repo allows you to run an rpc-node with read and write access or a sequencer node that proposes rollup transactions.  You will only be able to run a sequencer node if the Sigil sequencer is offline for an extended period of time (see section below).
+
+Currently, Sigil L2 is in testnet and settles to Sepolia as its L1.
+
 # I want to run an rpc node
 
-services: op-node, op-geth
+## requirements
+
+- As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 40gb of storage, and any decent cpu.
+- You will also need access to a Sepolia rpc as well as a Sepolia beacon rpc.
+
+## services
+
+op-node, op-geth
+
+## Starting and stopping
 
 ```bash
 cp .env.example .env
@@ -28,8 +41,15 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 
 *actually, it's the `batcher` service that sends transactions to the blobs, but it can be thought about as the same entity when considering a centralized sequencer
 
-services: op-node, op-geth, op-batcher, op-succinct-validity (proposer)
-You will also need a Succinct prover network rpc.  You can either use Succinct's prover network or self-host a [Hierophant](https://github.com/unattended-backpack/hierophant/) instance.
+## requirements
+
+- As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 40gb of storage, and any decent cpu.
+- Sepolia rpc as well as a Sepolia beacon rpc.
+- You will also need a Succinct prover network rpc.  You can either use Succinct's prover network or self-host a [Hierophant](https://github.com/unattended-backpack/hierophant/) instance.
+
+## services
+
+op-node, op-geth, op-batcher, op-succinct-validity (proposer)
 
 ```bash
 cp .env.example .env
