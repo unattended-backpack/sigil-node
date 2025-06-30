@@ -63,18 +63,18 @@ echo "Sampling, please wait..."
 T0=$(get_block_number "$ETH_RPC_URL")
 echo "Current synced block: $T0"
 
-# Wait 30 seconds
-echo "Sleeping 30 seconds then checking again..."
-sleep 30
+# Wait 60 seconds
+echo "Sleeping 1 minute then checking again..."
+sleep 60
 
 # Get second block count
 T1=$(get_block_number "$ETH_RPC_URL")
-echo "Synced block after 30 seconds: $T1"
+echo "Synced block after 1 minute: $T1"
 
 # Calculate blocks per minute
 PER_MIN=$(($T1 - $T0))
-PER_MIN=$(($PER_MIN * 2))
 echo "Blocks syncing per minute: $PER_MIN"
+echo "💡 Tip: Block syncing speed isn't constant. This number will fluctuate."
 
 if [ $PER_MIN -eq 0 ]; then
 	echo "Not syncing"
@@ -104,9 +104,9 @@ echo "Sync Progress:"
 echo "=============="
 
 if [ $MINUTES -le 60 ]; then
-	echo "⏱️  Minutes until sync completed: $MINUTES"
+	echo "⏱️ Minutes until sync completed: $MINUTES"
 else
-	echo "⏱️  Hours until sync completed: $HOURS"
+	echo "⏱️ Hours until sync completed: $HOURS"
 fi
 
 # Show percentage complete

@@ -25,3 +25,7 @@ You will also need a Succinct prover network rpc.  You can either use Succinct's
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.sequencer.yml up
 ```
+
+# Check sync progress
+
+You can run `progress.sh` to check the current sync progress against `SIGIL_SEQUENCER`.
