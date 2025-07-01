@@ -87,13 +87,13 @@ HEAD=$(get_block_number "$SIGIL_SEQUENCER")
 echo "Sigil head block: $HEAD"
 echo "Local block: $T1"
 
-BEHIND=$(expr $HEAD - $T1)
-echo "Blocks behind: $BEHIND"
-
-if [ $BEHIND -le 0 ]; then
+if [ $HEAD == $T1 ]; then
 	echo "✅ Your node is fully synced!"
 	exit 0
 fi
+
+BEHIND=$(expr $HEAD - $T1)
+echo "Blocks behind: $BEHIND"
 
 # Calculate time estimates
 MINUTES=$(expr $BEHIND / $PER_MIN)

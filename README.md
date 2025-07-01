@@ -78,3 +78,7 @@ This will run a node with http access through port `8545` by default.
 # Check sync progress
 
 You can run `progress.sh` to check the current sync progress against the head of `SIGIL_SEQUENCER` rpc set in env.
+
+# Bridging Ether
+
+To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7C61e5BE8e923D2F67d36530FC121aC617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
