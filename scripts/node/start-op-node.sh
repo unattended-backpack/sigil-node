@@ -12,7 +12,7 @@ op-node \
 	--l2.jwt-secret=/shared/jwt.txt \
 	--l1.beacon=$L1_BEACON_RPC_URL \
 	--l2.enginekind=geth \
-	--verifier.l1-confs=64 \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
-	--safedb.path=/safedb
+	--safedb.path=/safedb \
+	--p2p.static=$SEQUENCER_MULTIADDR

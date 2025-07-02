@@ -28,6 +28,6 @@ geth \
 	--authrpc.addr=0.0.0.0 \
 	--authrpc.port=8551 \
 	--authrpc.jwtsecret=/shared/jwt.txt \
-	--rollup.disabletxpoolgossip=true \
 	--rollup.sequencerhttp=${SIGIL_SEQUENCER} \
+	--rollup.disabletxpoolgossip=true \
 	--bootnodes=${GETH_BOOTNODES}

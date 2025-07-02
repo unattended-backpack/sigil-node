@@ -29,4 +29,5 @@ geth \
 	--authrpc.port=8551 \
 	--authrpc.jwtsecret=/shared/jwt.txt \
 	--rollup.disabletxpoolgossip=true \
+	--discovery.port=${PORT__OP_GETH_P2P:-39393}: \
 	--bootnodes=${GETH_BOOTNODES}

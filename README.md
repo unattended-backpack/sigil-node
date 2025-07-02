@@ -10,7 +10,7 @@ Currently, Sigil L2 is in testnet and settles to Sepolia as its L1.
 
 ## requirements
 
-- As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 40gb of storage, and any decent cpu.
+- As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 20gb of storage, and any decent cpu.
 - You will also need access to a Sepolia rpc as well as a Sepolia beacon rpc.
 
 ## services

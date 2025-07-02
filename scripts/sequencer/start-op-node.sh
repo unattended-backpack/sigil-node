@@ -13,8 +13,8 @@ op-node \
 	--l1.beacon=$L1_BEACON_RPC_URL \
 	--l2.enginekind=geth \
 	--sequencer.enabled \
-	--sequencer.l1-confs=5 \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
 	--p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
+	--p2p.advertise.tcp=${PORT__OP_NODE_P2P:-9003} \
 	--safedb.path=/safedb
