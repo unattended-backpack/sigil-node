@@ -14,8 +14,8 @@ services:
       - shared:/shared
       - safedb:/safedb
     ports:
-      - ${PORT__OP_NODE_P2P:-9003}:9003/udp
-      - ${PORT__OP_NODE_P2P:-9003}:9003/tcp
+      - ${PORT__OP_NODE_P2P:-9222}:9222/udp
+      - ${PORT__OP_NODE_P2P:-9222}:9222/tcp
       - ${PORT__OP_NODE_HTTP:-9545}:9545
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -37,8 +37,8 @@ services:
     ports:
       - ${PORT__OP_GETH_HTTP:-8545}:8545
       - ${PORT__OP_GETH_WS:-8546}:8546
-      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/udp
-      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/tcp
+      - ${PORT__OP_GETH_P2P:-30303}:30303/udp
+      - ${PORT__OP_GETH_P2P:-30303}:30303/tcp
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
