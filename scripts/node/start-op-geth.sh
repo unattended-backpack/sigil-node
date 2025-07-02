@@ -30,4 +30,5 @@ geth \
 	--authrpc.jwtsecret=/shared/jwt.txt \
 	--rollup.sequencerhttp=${SIGIL_SEQUENCER} \
 	--rollup.disabletxpoolgossip=true \
-	--bootnodes=${GETH_BOOTNODES}
+	--bootnodes=${GETH_BOOTNODES} \
+	--nodiscover=true

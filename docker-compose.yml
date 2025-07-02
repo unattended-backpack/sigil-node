@@ -17,6 +17,7 @@ services:
       - ${PORT__OP_NODE_P2P:-9222}:9222/udp
       - ${PORT__OP_NODE_P2P:-9222}:9222/tcp
       - ${PORT__OP_NODE_HTTP:-9545}:9545
+      - 7300:7300
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

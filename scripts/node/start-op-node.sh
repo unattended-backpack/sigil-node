@@ -15,4 +15,8 @@ op-node \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
 	--safedb.path=/safedb \
-	--p2p.static=$SEQUENCER_MULTIADDR
+	--p2p.static=$SEQUENCER_MULTIADDR \
+	--p2p.nat=true \
+	--p2p.bootnodes=$NODE_BOOTNODES \
+	--p2p.no-discovery=true \
+	--metrics.enabled=true

@@ -16,4 +16,7 @@ op-node \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
 	--p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
-	--safedb.path=/safedb
+	--safedb.path=/safedb \
+	--p2p.nat=true \
+	--p2p.no-discovery=true \
+	--metrics.enabled=true
