@@ -16,7 +16,9 @@ op-node \
 	--rpc.enable-admin \
 	--safedb.path=/safedb \
 	--p2p.static=$SEQUENCER_MULTIADDR \
-	--p2p.nat=true \
-	--p2p.bootnodes=$NODE_BOOTNODES \
-	--p2p.no-discovery=true \
-	--metrics.enabled=true
+	--p2p.listen.ip=0.0.0.0 \
+	--p2p.listen.tcp=9222 \
+	--p2p.listen.udp=9222 \
+	--syncmode=execution-layer
+
+# TODO: inherit ports from .env

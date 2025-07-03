@@ -22,13 +22,11 @@ geth \
 	--ws.origins="*" \
 	--ws.api=web3,debug,eth,txpool,net,engine,miner \
 	--syncmode=full \
-	--gcmode=archive \
+	--gcmode=full \
 	--networkid=51611 \
 	--authrpc.vhosts="*" \
 	--authrpc.addr=0.0.0.0 \
 	--authrpc.port=8551 \
 	--authrpc.jwtsecret=/shared/jwt.txt \
 	--rollup.sequencerhttp=${SIGIL_SEQUENCER} \
-	--rollup.disabletxpoolgossip=true \
-	--bootnodes=${GETH_BOOTNODES} \
-	--nodiscover=true
+	--bootnodes=${GETH_BOOTNODES}

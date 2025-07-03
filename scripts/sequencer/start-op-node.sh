@@ -17,6 +17,8 @@ op-node \
 	--rpc.enable-admin \
 	--p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
 	--safedb.path=/safedb \
-	--p2p.nat=true \
-	--p2p.no-discovery=true \
-	--metrics.enabled=true
+	--p2p.listen.ip=0.0.0.0 \
+	--p2p.listen.tcp=9222 \
+	--p2p.listen.udp=9222
+
+# TODO: inherit ports from .env
