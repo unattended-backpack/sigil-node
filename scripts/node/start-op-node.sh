@@ -20,6 +20,7 @@ op-node \
 	--p2p.priv.path=/opnode_p2p_priv/priv.txt \
 	--p2p.static=$SEQUENCER_MULTIADDR \
 	--syncmode=execution-layer \
+	--p2p.nat=true \
 	--p2p.listen.ip=0.0.0.0 \
 	--p2p.listen.tcp=${PORT__OP_NODE_P2P:-9222} \
 	--p2p.listen.udp=${PORT__OP_NODE_P2P:-9222}
