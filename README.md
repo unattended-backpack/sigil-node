@@ -21,7 +21,7 @@ op-node, op-geth
 
 ```bash
 cp .env.example .env
-# then, fill out relevant .env variables
+# then, fill out relevant .env variables.  For an rpc-node it is just an l1 rpc and l1 beacon rpc.
 
 # have fun with your rpc node!
 make node
