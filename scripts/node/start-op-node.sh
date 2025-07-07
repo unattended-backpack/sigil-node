@@ -15,6 +15,7 @@ op-node \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
 	--safedb.path=/safedb \
+	--p2p.priv.path=/opnode_p2p_priv/priv.txt \
 	--p2p.static=$SEQUENCER_MULTIADDR \
 	--p2p.listen.ip=0.0.0.0 \
 	--p2p.listen.tcp=9222 \

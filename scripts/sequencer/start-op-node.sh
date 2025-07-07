@@ -17,6 +17,7 @@ op-node \
 	--rpc.enable-admin \
 	--p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
 	--safedb.path=/safedb \
+	--p2p.priv.path=/opnode_p2p_priv/priv.txt \
 	--p2p.listen.ip=0.0.0.0 \
 	--p2p.listen.tcp=9222 \
 	--p2p.listen.udp=9222

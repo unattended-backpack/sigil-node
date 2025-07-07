@@ -13,6 +13,7 @@ services:
       - ./scripts:/scripts
       - shared:/shared
       - safedb:/safedb
+      - opnode_p2p_priv:/opnode_p2p_priv
     ports:
       - ${PORT__OP_NODE_P2P:-9222}:9222/udp
       - ${PORT__OP_NODE_P2P:-9222}:9222/tcp
@@ -62,3 +63,4 @@ volumes:
   datadir: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt
   safedb: # for op-node
+  opnode_p2p_priv: # private key for op-node peer ID.  Important for maintaining the same network identity after restarting
