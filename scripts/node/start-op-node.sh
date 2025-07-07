@@ -7,11 +7,12 @@ done
 
 op-node \
 	--l1=$L1_RPC_URL \
+	--l1.beacon=$L1_BEACON_RPC_URL \
+	--l1.rpckind=${L1_RPC_KIND:-standard} \
 	--l2=http://op-geth:8551 \
 	--rpc.addr=0.0.0.0 \
 	--rpc.port=${PORT__OP_NODE_HTTP:-9545} \
 	--l2.jwt-secret=/shared/jwt.txt \
-	--l1.beacon=$L1_BEACON_RPC_URL \
 	--l2.enginekind=geth \
 	--rollup.config=/chainconfig/rollup.json \
 	--rpc.enable-admin \
