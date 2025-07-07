@@ -9,6 +9,7 @@ op-node \
 	--l1=$L1_RPC_URL \
 	--l2=http://op-geth:8551 \
 	--rpc.addr=0.0.0.0 \
+	--rpc.port=${PORT__OP_NODE_HTTP:-9545} \
 	--l2.jwt-secret=/shared/jwt.txt \
 	--l1.beacon=$L1_BEACON_RPC_URL \
 	--l2.enginekind=geth \
@@ -19,7 +20,5 @@ op-node \
 	--safedb.path=/safedb \
 	--p2p.priv.path=/opnode_p2p_priv/priv.txt \
 	--p2p.listen.ip=0.0.0.0 \
-	--p2p.listen.tcp=9222 \
-	--p2p.listen.udp=9222
-
-# TODO: inherit ports from .env
+	--p2p.listen.tcp=${PORT__OP_NODE_P2P:-9222} \
+	--p2p.listen.udp=${PORT__OP_NODE_P2P:-9222}
