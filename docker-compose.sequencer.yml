@@ -39,7 +39,7 @@ services:
       - ./config:/app/configs
       - validity-tmp:/tmp
     ports:
-      - ${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:3001
+      - ${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
