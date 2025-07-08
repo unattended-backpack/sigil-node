@@ -21,7 +21,7 @@ geth \
 	--ws.port=${PORT__OP_GETH_WS:-8546} \
 	--ws.origins="*" \
 	--ws.api=web3,debug,eth,txpool,net,engine,miner \
-	--syncmode=full \
+	--syncmode=${NODE_TYPE:-full} \
 	--gcmode=full \
 	--networkid=51611 \
 	--authrpc.vhosts="*" \
