@@ -13,10 +13,12 @@ services:
       - ./scripts:/scripts
       - shared:/shared
       - safedb:/safedb
+      - opnode_p2p_priv:/opnode_p2p_priv
     ports:
-      - ${PORT__OP_NODE_P2P:-9003}:9003/udp
-      - ${PORT__OP_NODE_P2P:-9003}:9003/tcp
-      - ${PORT__OP_NODE_HTTP:-9545}:9545
+      - ${PORT__OP_NODE_P2P:-9222}:${PORT__OP_NODE_P2P:-9222}/udp
+      - ${PORT__OP_NODE_P2P:-9222}:${PORT__OP_NODE_P2P:-9222}/tcp
+      - ${PORT__OP_NODE_HTTP:-9545}:${PORT__OP_NODE_HTTP:-9545}
+      - 7300:7300
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -35,10 +37,10 @@ services:
       - shared:/shared
       - datadir:/datadir
     ports:
-      - ${PORT__OP_GETH_HTTP:-8545}:8545
-      - ${PORT__OP_GETH_WS:-8546}:8546
-      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/udp
-      - ${PORT__OP_GETH_P2P:-39393}:${PORT__OP_GETH_P2P:-39393}/tcp
+      - ${PORT__OP_GETH_HTTP:-8545}:${PORT__OP_GETH_HTTP:-8545}
+      - ${PORT__OP_GETH_WS:-8546}:${PORT__OP_GETH_WS:-8546}
+      - ${PORT__OP_GETH_P2P:-30303}:${PORT__OP_GETH_P2P:-30303}/udp
+      - ${PORT__OP_GETH_P2P:-30303}:${PORT__OP_GETH_P2P:-30303}/tcp
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -61,3 +63,4 @@ volumes:
   datadir: # chain data
   shared: # for storing jwt.txt and INITIALIZED.txt
   safedb: # for op-node
+  opnode_p2p_priv: # private key for op-node peer ID.  Important for maintaining the same network identity after restarting
