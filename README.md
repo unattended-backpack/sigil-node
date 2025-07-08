@@ -25,6 +25,7 @@ cp .env.example .env
 
 # have fun with your rpc node!
 make node
+# run with `make node-d` to run in the background
 
 # Stop any time with
 make stop-node
@@ -65,6 +66,7 @@ cp .env.example .env
 
 # Prove transactions and safely return funds to the L1!
 make sequencer
+# run with `make sequencer-d` to run in the background
 
 # Stop any time with
 make stop-sequencer

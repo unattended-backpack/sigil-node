@@ -95,25 +95,24 @@ fi
 BEHIND=$(expr $HEAD - $T1)
 echo "Blocks behind: $BEHIND"
 
-# Calculate time estimates
-MINUTES=$(expr $BEHIND / $PER_MIN)
-HOURS=$(expr $MINUTES / 60)
-
 echo ""
 echo "Sync Progress:"
 echo "=============="
-
-if [ $MINUTES -le 60 ]; then
-	echo "⏱️ Minutes until sync completed: $MINUTES"
-else
-	echo "⏱️ Hours until sync completed: $HOURS"
-fi
 
 # Show percentage complete
 TOTAL_BLOCKS=$HEAD
 SYNCED_BLOCKS=$T1
 PERCENTAGE=$((SYNCED_BLOCKS * 100 / TOTAL_BLOCKS))
 echo "📊 Sync progress: $PERCENTAGE% ($SYNCED_BLOCKS / $TOTAL_BLOCKS blocks)"
-
 echo ""
 echo "💡 Tip: You can run this script again to check updated progress!"
+
+# Calculate time estimates
+MINUTES=$(expr $BEHIND / $PER_MIN)
+HOURS=$(expr $MINUTES / 60)
+
+if [ $MINUTES -le 60 ]; then
+	echo "⏱️ Minutes until sync completed: $MINUTES"
+else
+	echo "⏱️ Hours until sync completed: $HOURS"
+fi
