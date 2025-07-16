@@ -1,7 +1,5 @@
 # sigil-node
 
-Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
-
 This repo allows you to run an rpc-node with read and write access or a sequencer node that proposes rollup transactions.  You will only be able to run a sequencer node if the Sigil sequencer is offline for an extended period of time (see section below).
 
 Currently, Sigil L2 is in testnet and settles to Sepolia as its L1.
@@ -84,3 +82,5 @@ You can run `progress.sh` to check the current sync progress against the head of
 # Bridging Ether
 
 To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7C61e5BE8e923D2F67d36530FC121aC617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
+
+# Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
