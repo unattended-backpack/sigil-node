@@ -7,7 +7,7 @@ echo "Container IP: $CONTAINER_IP"
 cd ~
 cat >~/hierophant.toml <<EOF
 # only used for artifact upload by op-succinct validity, which is running on the same docker network
-this_hierophant_ip = "http://${CONTAINER_IP}"
+this_hierophant_ip = "${CONTAINER_IP}"
 grpc_port=${PORT__HIEROPHANT_GRPC}
 http_port=${PORT__HIEROPHANT_HTTP}
 
