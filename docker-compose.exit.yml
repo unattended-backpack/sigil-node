@@ -80,7 +80,7 @@ services:
   # manages worker nodes who execute proofs for Hierophant
   magister:
     image: jossduff/magister:latest
-    entrypoint: /scripts/exit/start-hierophant.sh
+    entrypoint: /scripts/exit/start-magister.sh
     env_file:
       - .env
     volumes:
