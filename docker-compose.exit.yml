@@ -89,6 +89,8 @@ services:
       - ${PORT__MAGISTER_HTTP:-8555}:${PORT__MAGISTER_HTTP:-8555}
     environment:
       - PORT__MAGISTER_HTTP=${PORT__MAGISTER_HTTP:-8555}
+      - THIS_IP=${THIS_IP}
+      - PORT__HIEROPHANT_HTTP=${PORT__HIEROPHANT_HTTP:-9010}
       - RUST_LOG_STYLE=always
       - RUST_LOG=info
       - RUST_BACKTRACE=1

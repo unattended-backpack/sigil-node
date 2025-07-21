@@ -1,13 +1,12 @@
 #!/bin/sh
 
-CONTAINER_IP=$(hostname -i)
-echo "Container IP: $CONTAINER_IP"
-
 # Write the config.
 cd ~
 cat >~/magister.toml <<EOF
-# only used for artifact upload by op-succinct validity, which is running on the same docker network
-this_magister_addr = "http://${CONTAINER_IP}"
+# both hierophant and magister are being run on the same machine
+this_magister_addr = "http://${THIS_IP}"
+hierophant_ip = "${THIS_IP}"
+hierophant_http_port = ${PORT__HIEROPHANT_HTTP}
 http_port=${PORT__MAGISTER_HTTP}
 vast_api_key="${VAST_API_KEY}"
 
@@ -15,7 +14,7 @@ vast_api_key="${VAST_API_KEY}"
 number_instances=1
 
 # Contemplant vast.ai template
-template_hash = "dad63ef9613b34dd9aafe11e5d310b6f"
+template_hash = "07f609a33b863d70714650f7eb385032"
 # vast hosts who have been unreliable
 bad_hosts = [213498, 74292,113132]
 bad_machines = [12217,19571]
