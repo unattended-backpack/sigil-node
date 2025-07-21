@@ -11,7 +11,7 @@ http_port=${PORT__MAGISTER_HTTP}
 vast_api_key="${VAST_API_KEY}"
 
 # 1 instance should be enough
-number_instances=1
+number_instances=${NUMBER_INSTANCES}
 
 # Contemplant vast.ai template
 template_hash = "1878058a3fab0d314a768287dc41c456"

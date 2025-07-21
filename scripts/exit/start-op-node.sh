@@ -5,6 +5,7 @@ while [ ! -f /shared/initialized.txt ]; do
 	sleep 1
 done
 
+# TODO: only listen to L1
 op-node \
 	--l1=$L1_RPC_URL \
 	--l1.beacon=$L1_BEACON_RPC_URL \

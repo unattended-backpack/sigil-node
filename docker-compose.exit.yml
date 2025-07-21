@@ -36,6 +36,12 @@ services:
       - RUST_BACKTRACE=1
       - NETWORK_RPC_URL=http://hierophant:${PORT__HIEROPHANT_GRPC:-9000}
       - SP1_PROVER=network
+      # How many provers working concurrently.  This should be the same as magister's NUMBER_INSTANCES
+      - MAX_CONCURRENT_PROOF_REQUESTS=${NUMBER_PROVERS:-1}
+      # How many blocks per span proof
+      - RANGE_PROOF_INTERVAL=${RANGE_PROOF_INTERVAL:-50}
+      # How many blocks per agg proof
+      - SUBMISSION_INTERVAL=${SUBMISSION_INTERVAL:-50}
     depends_on:
       - postgres
       - op-geth
@@ -94,6 +100,9 @@ services:
       - RUST_LOG_STYLE=always
       - RUST_LOG=info
       - RUST_BACKTRACE=1
+      # Number of prover instances to run.  Should be the same as op-succinct-validity's 
+      # MAX_CONCURRENT_PROOF_REQUESTS
+      - NUMBER_INSTANCES=${NUMBER_PROVERS:-1}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
