@@ -14,7 +14,7 @@ vast_api_key="${VAST_API_KEY}"
 number_instances=1
 
 # Contemplant vast.ai template
-template_hash = "07f609a33b863d70714650f7eb385032"
+template_hash = "1878058a3fab0d314a768287dc41c456"
 # vast hosts who have been unreliable
 bad_hosts = [213498, 74292,113132]
 bad_machines = [12217,19571]
