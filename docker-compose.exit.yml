@@ -64,6 +64,7 @@ services:
 
   # locally hosted prover network
   hierophant:
+    # You're welcome to build your own image and use it here instead: https://github.com/unattended-backpack/hierophant/
     image: jossduff/hierophant:latest
     entrypoint: /scripts/exit/start-hierophant.sh
     env_file:
@@ -85,6 +86,7 @@ services:
 
   # manages worker nodes who execute proofs for Hierophant
   magister:
+    # You're welcome to build your own image and use it here instead: https://github.com/unattended-backpack/magister
     image: jossduff/magister:latest
     entrypoint: /scripts/exit/start-magister.sh
     env_file:

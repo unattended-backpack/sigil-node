@@ -1,10 +1,10 @@
 # sigil-node
 
-This repo allows you to run an rpc-node with read and write access or a sequencer node that proposes rollup transactions.  You will only be able to run a sequencer node if the Sigil sequencer is offline for an extended period of time (see section below).
+This repo allows you to run an rpc-node with read and write access or a sequencer exit node that proposes rollup transactions.  You will only be able to run a sequencer exit node if the Sigil sequencer is offline for an extended period of time (see section below).
 
 Currently, Sigil L2 is in testnet and settles to Sepolia as its L1.
 
-# I want to run an rpc node
+# I want to run an RPC node
 
 ## requirements
 
@@ -32,11 +32,11 @@ make stop-node
 # see Makefile for more commands
 ```
 
-This will run an rpc node for read and write access to Sigil L2.  Transactions sent to this node will get forwarded to the `SIGIL_SEQUENCER` to then be executed.  The `op-geth` execution node allows http access through port `8545` by default.  Port overrides available in the `.env` (optional section at the bottom).
+This will run an RPC node for read and write access to Sigil L2.  Transactions sent to this node will get forwarded to the `SIGIL_SEQUENCER` to then be executed.  The `op-geth` execution node allows HTTP access through port `8545` by default.  Port overrides available in the `.env` (optional section at the bottom).
 
 Enjoy and please report any issues to the Sigil discord!
 
-# The Sigil sequencer has gone offline and I need to escape to the L1
+# The Sigil sequencer has gone offline and I need and exit window to escape to the L1
 
 > [!WARNING] The current testnet is just for testing rpc node compatibility.  Running a local sequencer is out of scope.  Next testnet we will have an exit window test that will require starting a local sequencer.
 
@@ -50,11 +50,11 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 
 - As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 40gb of storage, and any decent cpu.
 - Sepolia rpc as well as a Sepolia beacon rpc.
-- You will also need a Succinct prover network rpc.  You can either use Succinct's prover network or self-host a [Hierophant](https://github.com/unattended-backpack/hierophant/) instance.
+- Vast.ai API key connected to an account with ~$20 of credits (they accept crypto).  This is for executing a ZK proof on a machine with a GPU.  A machine on Vast.ai will only costs $0.3/hour - $0.6/hour and a proof will take 1-2 hours so $20 should be plenty.  This repo is for ease of use so we leave it as an exercise for a technical reader to run a prover on their own GPU - read [Hierophant](github.com/unattended-backpack/hierophant/).  
 
 ## services
 
-op-node, op-geth, op-batcher, op-succinct-validity (proposer)
+[op-node](https://github.com/ethereum-optimism/optimism/), [op-geth](https://github.com/ethereum-optimism/optimism/), [op-batcher](https://github.com/ethereum-optimism/optimism/), [op-succinct-validity](https://github.com/succinctlabs/op-succinct/tree/main/validity) (proposer), [hierophant](https://github.com/unattended-backpack/hierophant/) (prover network), [magister](https://github.com/unattended-backpack/magister) (creates provers on Vast.ai)
 
 ## Starting and stopping
 
@@ -63,25 +63,54 @@ cp .env.example .env
 # then, fill out relevant .env variables
 
 # Prove transactions and safely return funds to the L1!
-make sequencer
-# run with `make sequencer-d` to run in the background
+make exit
+# run with `make exit-d` to run in the background
 
 # Stop any time with
-make stop-sequencer
+make stop-exit
 # note: some processes like op-node can take awhile (~5 mins) to cleanly shut down
 
 # see Makefile for more commands
 ```
 
-This will run a node with http access through port `8545` by default.
+You're now running your own sequencer and prover network!  You can now exit the L2 by initiating a force inclusion transaction from the L1 (Sepolia) and it will be picked and proven by this sequencer.  Proof generation and settling will happen automatically but give it time.  When you're done run `make stop-exit` then head to your Vast.ai instance page to shut down any remaining Vast instances.
+
+Enjoy and please report any issues to the Sigil discord!
+
+### services exposed (defaults)
+
+op-geth http: `http://127.0.0.1:8545`
+op-node http: `http://127.0.0.1:9545`
+hierophant http: `http://127.0.0.1:9010`
+magister http: `http://127.0.0.1:8555`
+
+### Track proof progress
+
+To check on the progress of your prover, try this curl command:
+
+```bash
+curl --request GET --url http://127.0.0.1:9010/contemplants
+```
+
+Reading the output: proof progress is indicated in the `progress` field when the Contemplant has `status` = `Busy`.  Proof progress percentage start as `Execution: 0` and move to `Execution: 100` -> `Serialization: 0` -> `Serialization: 100` -> `Done`.  After it's `Done` it can take a few minutes to appear on-chain.
+
+# Bridging Ether
+
+To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7C61e5BE8e923D2F67d36530FC121aC617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
 
 # Check sync progress
 
 You can run `progress.sh` to check the current sync progress against the head of `SIGIL_SEQUENCER` rpc set in env.
 
-# Bridging Ether
+# Troubleshooting
 
-To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7C61e5BE8e923D2F67d36530FC121aC617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
+Steps:
+
+1. Check your `.env` to make sure your variables are correct.
+2. Give it time.  Most of these systems are quite fault resilient and can recover on their own.  If it's still not working in an hour or two then proceed to step 2.
+3. Stop and restart.  Stop the service (`make stop-exit` or `make stop-node`) and restart (`make node` or `make exit`).
+4. If it's still not working the nuclear option is deleting all data and restarting.  First, stop your services (`make stop-exit` or `make stop-node`) then delete your data `make clean` (WARNING: this will delete all chain data and require a re-sync.  Syncing is quick for `node` but will take awhile for `exit`).  Then restart with `make node` or `make exit`.
+5. If things still aren't working head to the Sigil discord or open an issue with as many error logs as you can collect over the services.
 
 # Developing
 
