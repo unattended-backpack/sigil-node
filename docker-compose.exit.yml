@@ -35,6 +35,7 @@ services:
       # use the OP_SUCCINCT_DATABASE_URL if provided, otherwise use the local postgres db container
       - DATABASE_URL=${OP_SUCCINCT_VALIDITY_DATABASE_URL}
       - NETWORK_RPC_URL=http://hierophant:${PORT__HIEROPHANT_GRPC}
+      - NETWORK_PRIVATE_KEY=${PRIVATE_KEY}
       # How many provers working concurrently.  This should be the same as magister's NUMBER_INSTANCES
       - MAX_CONCURRENT_PROOF_REQUESTS=${NUMBER_PROVERS}
     depends_on:
