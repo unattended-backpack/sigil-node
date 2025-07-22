@@ -79,10 +79,10 @@ Enjoy and please report any issues to the Sigil discord!
 
 ### services exposed (defaults)
 
-op-geth http: `http://127.0.0.1:8545`
-op-node http: `http://127.0.0.1:9545`
-hierophant http: `http://127.0.0.1:9010`
-magister http: `http://127.0.0.1:8555`
+- op-geth http: `http://127.0.0.1:8545`
+- op-node http: `http://127.0.0.1:9545`
+- hierophant http: `http://127.0.0.1:9010`
+- magister http: `http://127.0.0.1:8555`
 
 ### Track proof progress
 
