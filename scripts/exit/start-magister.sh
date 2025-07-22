@@ -16,7 +16,7 @@ number_instances=${NUMBER_INSTANCES}
 # Contemplant vast.ai template
 template_hash = "1878058a3fab0d314a768287dc41c456"
 # vast hosts who have been unreliable
-bad_hosts = [213498, 74292,113132]
+bad_hosts = [213498, 74292, 113132, 249296]
 bad_machines = [12217,19571]
 # vast hosts who have been reliable
 good_hosts = [207289, 1276]
