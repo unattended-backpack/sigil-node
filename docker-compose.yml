@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
+      - .env.maintainer
       - .env
     volumes:
       - ./config:/chainconfig
@@ -30,6 +31,7 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
+      - .env.maintainer
       - .env
     volumes:
       - ./config:/chainconfig

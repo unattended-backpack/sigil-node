@@ -112,9 +112,10 @@ Steps:
 4. If it's still not working the nuclear option is deleting all data and restarting.  First, stop your services (`make stop-exit` or `make stop-node`) then delete your data `make clean` (WARNING: this will delete all chain data and require a re-sync.  Syncing is quick for `node` but will take awhile for `exit`).  Then restart with `make node` or `make exit`.
 5. If things still aren't working head to the Sigil discord or open an issue with as many error logs as you can collect over the services.
 
-# Developing
+# Developing & maintaining
 
 When a new Contemplant template is pushed to Vast.ai make sure to copy the new template hash from the Vast UI and add it to `scripts/exit/start-magister`, overwriting the old `template_hash`.
 
-### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
+When the Sigil team makes changes, make sure to update `.env.maintainer` values and config files in `config`.
 
+### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
