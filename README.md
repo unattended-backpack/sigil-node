@@ -20,6 +20,8 @@ op-node, op-geth
 ```bash
 cp .env.example .env
 # then, fill out relevant .env variables.  For an rpc-node it is just an l1 rpc and l1 beacon rpc.
+# If you know what you're doing, you can modify .env.default
+# Don't modify .env.maintainer
 
 # have fun with your rpc node!
 make node
@@ -61,6 +63,8 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 ```bash
 cp .env.example .env
 # then, fill out relevant .env variables
+# If you know what you're doing, you can modify .env.default
+# Don't modify .env.maintainer
 
 # Prove transactions and safely return funds to the L1!
 make exit

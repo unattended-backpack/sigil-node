@@ -13,7 +13,11 @@ services:
     image: jossduff/op-succinct-validity:v2.3.0
     entrypoint: /scripts/exit/start-op-succinct-validity.sh
     env_file:
+      # default values
+      - .env.default
+      # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
@@ -69,7 +73,11 @@ services:
     image: jossduff/hierophant:latest
     entrypoint: /scripts/exit/start-hierophant.sh
     env_file:
+      # default values
+      - .env.default
+      # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
@@ -92,7 +100,11 @@ services:
     image: jossduff/magister:latest
     entrypoint: /scripts/exit/start-magister.sh
     env_file:
+      # default values
+      - .env.default
+      # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
