@@ -20,6 +20,7 @@ op-node, op-geth
 ```bash
 cp .env.example .env
 # then, fill out relevant .env variables.  For an rpc-node it is just an l1 rpc and l1 beacon rpc.
+# Don't modify .env.maintainer
 
 # have fun with your rpc node!
 make node
@@ -50,6 +51,7 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 
 - As we are currently in a testnet, the chain is quite small and doesn't require extensive resources.  You should be able to make due with 8gb of ram, 40gb of storage, and any decent cpu.
 - Sepolia rpc as well as a Sepolia beacon rpc.
+- A private key for submitting L1 (Sepolia) transactions
 - Vast.ai API key connected to an account with ~$20 of credits (they accept crypto).  This is for executing a ZK proof on a machine with a GPU.  A machine on Vast.ai will only costs $0.3/hour - $0.6/hour and a proof will take 1-2 hours so $20 should be plenty.  This repo is for ease of use so we leave it as an exercise for a technical reader to run a prover on their own GPU - read [Hierophant](github.com/unattended-backpack/hierophant/).  
 
 ## services
@@ -61,6 +63,7 @@ Sigil delivers on the promises of L2 inheritance of L1 security by imposing a de
 ```bash
 cp .env.example .env
 # then, fill out relevant .env variables
+# Don't modify .env.maintainer
 
 # Prove transactions and safely return funds to the L1!
 make exit
@@ -83,6 +86,8 @@ Enjoy and please report any issues to the Sigil discord!
 - op-node http: `http://127.0.0.1:9545`
 - hierophant http: `http://127.0.0.1:9010`
 - magister http: `http://127.0.0.1:8555`
+
+See bottom section of `.env.example` for other default ports.
 
 ### Track proof progress
 
@@ -112,9 +117,10 @@ Steps:
 4. If it's still not working the nuclear option is deleting all data and restarting.  First, stop your services (`make stop-exit` or `make stop-node`) then delete your data `make clean` (WARNING: this will delete all chain data and require a re-sync.  Syncing is quick for `node` but will take awhile for `exit`).  Then restart with `make node` or `make exit`.
 5. If things still aren't working head to the Sigil discord or open an issue with as many error logs as you can collect over the services.
 
-# Developing
+# Developing & maintaining
 
 When a new Contemplant template is pushed to Vast.ai make sure to copy the new template hash from the Vast UI and add it to `scripts/exit/start-magister`, overwriting the old `template_hash`.
 
-### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
+When the Sigil team makes changes, make sure to update `.env.maintainer` values and config files in `config`.
 
+### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)

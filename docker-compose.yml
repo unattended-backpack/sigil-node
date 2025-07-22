@@ -7,6 +7,9 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./config:/chainconfig
@@ -15,9 +18,9 @@ services:
       - safedb:/safedb
       - opnode_p2p_priv:/opnode_p2p_priv
     ports:
-      - ${PORT__OP_NODE_P2P:-9222}:${PORT__OP_NODE_P2P:-9222}/udp
-      - ${PORT__OP_NODE_P2P:-9222}:${PORT__OP_NODE_P2P:-9222}/tcp
-      - ${PORT__OP_NODE_HTTP:-9545}:${PORT__OP_NODE_HTTP:-9545}
+      - ${PORT__OP_NODE_P2P}:${PORT__OP_NODE_P2P}/udp
+      - ${PORT__OP_NODE_P2P}:${PORT__OP_NODE_P2P}/tcp
+      - ${PORT__OP_NODE_HTTP}:${PORT__OP_NODE_HTTP}
       - 7300:7300
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -30,6 +33,9 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./config:/chainconfig
@@ -37,10 +43,10 @@ services:
       - shared:/shared
       - datadir:/datadir
     ports:
-      - ${PORT__OP_GETH_HTTP:-8545}:${PORT__OP_GETH_HTTP:-8545}
-      - ${PORT__OP_GETH_WS:-8546}:${PORT__OP_GETH_WS:-8546}
-      - ${PORT__OP_GETH_P2P:-30303}:${PORT__OP_GETH_P2P:-30303}/udp
-      - ${PORT__OP_GETH_P2P:-30303}:${PORT__OP_GETH_P2P:-30303}/tcp
+      - ${PORT__OP_GETH_HTTP}:${PORT__OP_GETH_HTTP}
+      - ${PORT__OP_GETH_WS}:${PORT__OP_GETH_WS}
+      - ${PORT__OP_GETH_P2P}:${PORT__OP_GETH_P2P}/udp
+      - ${PORT__OP_GETH_P2P}:${PORT__OP_GETH_P2P}/tcp
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -52,6 +58,9 @@ services:
     image: alpine:latest
     command: /bin/sh -c "apk add --no-cache openssl && /scripts/initialize.sh"
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts

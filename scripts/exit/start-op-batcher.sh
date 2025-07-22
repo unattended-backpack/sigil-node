@@ -6,10 +6,10 @@ while [ ! -f /shared/initialized.txt ]; do
 done
 
 op-batcher \
-	--private-key=$GS_BATCHER_PRIVATE_KEY \
+	--private-key=$PRIVATE_KEY \
 	--l1-eth-rpc=$L1_RPC_URL \
-	--l2-eth-rpc=${L2_RPC:-http://op-geth:8545} \
-	--rollup-rpc=${ROLLUP_RPC:-http://op-node:9545} \
+	--l2-eth-rpc=http://op-geth:${PORT__OP_GETH_HTTP} \
+	--rollup-rpc=http://op-node:${PORT__OP_NODE_HTTP} \
 	--batch-type=1 \
 	--poll-interval=4s \
 	--sub-safety-margin=6 \

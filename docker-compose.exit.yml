@@ -13,6 +13,9 @@ services:
     image: jossduff/op-succinct-validity:v2.3.0
     entrypoint: /scripts/exit/start-op-succinct-validity.sh
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
@@ -21,7 +24,7 @@ services:
       - ./config:/app/configs
       - validity-tmp:/tmp
     ports:
-      - ${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}:${PORT__OP_SUCCINCT_VALIDITY_HTTP:-3001}
+      - ${PORT__OP_SUCCINCT_VALIDITY_HTTP}:${PORT__OP_SUCCINCT_VALIDITY_HTTP}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
@@ -30,18 +33,11 @@ services:
       - L2_RPC=http://op-geth:8545
       - L2_NODE_RPC=http://op-node:9545
       # use the OP_SUCCINCT_DATABASE_URL if provided, otherwise use the local postgres db container
-      - DATABASE_URL=${OP_SUCCINCT_VALIDITY_DATABASE_URL:-postgres://op-succinct@postgres:5432/op-succinct}
-      - RUST_LOG_STYLE=always
-      - RUST_LOG=info
-      - RUST_BACKTRACE=1
-      - NETWORK_RPC_URL=http://hierophant:${PORT__HIEROPHANT_GRPC:-9000}
-      - SP1_PROVER=network
+      - DATABASE_URL=${OP_SUCCINCT_VALIDITY_DATABASE_URL}
+      - NETWORK_RPC_URL=http://hierophant:${PORT__HIEROPHANT_GRPC}
+      - NETWORK_PRIVATE_KEY=${PRIVATE_KEY}
       # How many provers working concurrently.  This should be the same as magister's NUMBER_INSTANCES
-      - MAX_CONCURRENT_PROOF_REQUESTS=${NUMBER_PROVERS:-1}
-      # How many blocks per span proof
-      - RANGE_PROOF_INTERVAL=${RANGE_PROOF_INTERVAL:-50}
-      # How many blocks per agg proof
-      - SUBMISSION_INTERVAL=${SUBMISSION_INTERVAL:-50}
+      - MAX_CONCURRENT_PROOF_REQUESTS=${NUMBER_PROVERS}
     depends_on:
       - postgres
       - op-geth
@@ -68,18 +64,15 @@ services:
     image: jossduff/hierophant:latest
     entrypoint: /scripts/exit/start-hierophant.sh
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
     ports:
-      - ${PORT__HIEROPHANT_HTTP:-9010}:${PORT__HIEROPHANT_HTTP:-9010}
-      - ${PORT__HIEROPHANT_GRPC:-9000}:${PORT__HIEROPHANT_GRPC:-9000}
-    environment:
-      - PORT__HIEROPHANT_HTTP=${PORT__HIEROPHANT_HTTP:-9010}
-      - PORT__HIEROPHANT_GRPC=${PORT__HIEROPHANT_GRPC:-9000}
-      - RUST_LOG_STYLE=always
-      - RUST_LOG=info
-      - RUST_BACKTRACE=1
+      - ${PORT__HIEROPHANT_HTTP}:${PORT__HIEROPHANT_HTTP}
+      - ${PORT__HIEROPHANT_GRPC}:${PORT__HIEROPHANT_GRPC}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
@@ -90,21 +83,17 @@ services:
     image: jossduff/magister:latest
     entrypoint: /scripts/exit/start-magister.sh
     env_file:
+      # Maintainer set values like contract addresses, chain ids, etc
+      - .env.maintainer
+      # Values required to be set by end user like private key, rpcs, and api keys
       - .env
     volumes:
       - ./scripts:/scripts
     ports:
-      - ${PORT__MAGISTER_HTTP:-8555}:${PORT__MAGISTER_HTTP:-8555}
+      - ${PORT__MAGISTER_HTTP}:${PORT__MAGISTER_HTTP}
     environment:
-      - PORT__MAGISTER_HTTP=${PORT__MAGISTER_HTTP:-8555}
-      - THIS_IP=${THIS_IP}
-      - PORT__HIEROPHANT_HTTP=${PORT__HIEROPHANT_HTTP:-9010}
-      - RUST_LOG_STYLE=always
-      - RUST_LOG=info
-      - RUST_BACKTRACE=1
-      # Number of prover instances to run.  Should be the same as op-succinct-validity's 
-      # MAX_CONCURRENT_PROOF_REQUESTS
-      - NUMBER_INSTANCES=${NUMBER_PROVERS:-1}
+      # Number of prover instances to run.  Should be the same as op-succinct-validity's MAX_CONCURRENT_PROOF_REQUESTS
+      - NUMBER_INSTANCES=${NUMBER_PROVERS}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
