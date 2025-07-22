@@ -7,8 +7,6 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
-      # default values
-      - .env.default
       # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
       # Values required to be set by end user like private key, rpcs, and api keys
@@ -35,8 +33,6 @@ services:
     restart: unless-stopped
     stop_grace_period: 5m
     env_file:
-      # default values
-      - .env.default
       # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
       # Values required to be set by end user like private key, rpcs, and api keys
@@ -62,8 +58,6 @@ services:
     image: alpine:latest
     command: /bin/sh -c "apk add --no-cache openssl && /scripts/initialize.sh"
     env_file:
-      # default values
-      - .env.default
       # Maintainer set values like contract addresses, chain ids, etc
       - .env.maintainer
       # Values required to be set by end user like private key, rpcs, and api keys
