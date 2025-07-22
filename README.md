@@ -117,3 +117,4 @@ Steps:
 When a new Contemplant template is pushed to Vast.ai make sure to copy the new template hash from the Vast UI and add it to `scripts/exit/start-magister`, overwriting the old `template_hash`.
 
 ### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
+
