@@ -8,6 +8,7 @@ done
 #init datdir
 geth init --state.scheme=hash --datadir=/datadir chainconfig/genesis.json
 
+# TODO: only listen to L1
 geth \
 	--datadir /datadir \
 	--http \

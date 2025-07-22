@@ -1,5 +1,5 @@
 # Base configuration.  Not meant to be used by itself, use either
-# docker-compose.node.yml or docker-compose.sequencer.yml as overrides
+# docker-compose.node.yml or docker-compose.exit.yml as overrides
 
 services:
   op-node: 
