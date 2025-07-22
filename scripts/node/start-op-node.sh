@@ -8,10 +8,10 @@ done
 op-node \
 	--l1=$L1_RPC_URL \
 	--l1.beacon=$L1_BEACON_RPC_URL \
-	--l1.rpckind=${L1_RPC_KIND:-standard} \
+	--l1.rpckind=${L1_RPC_KIND} \
 	--l2=http://op-geth:8551 \
 	--rpc.addr=0.0.0.0 \
-	--rpc.port=${PORT__OP_NODE_HTTP:-9545} \
+	--rpc.port=${PORT__OP_NODE_HTTP} \
 	--l2.jwt-secret=/shared/jwt.txt \
 	--l2.enginekind=geth \
 	--rollup.config=/chainconfig/rollup.json \
@@ -22,5 +22,5 @@ op-node \
 	--syncmode=execution-layer \
 	--p2p.nat=true \
 	--p2p.listen.ip=0.0.0.0 \
-	--p2p.listen.tcp=${PORT__OP_NODE_P2P:-9222} \
-	--p2p.listen.udp=${PORT__OP_NODE_P2P:-9222}
+	--p2p.listen.tcp=${PORT__OP_NODE_P2P} \
+	--p2p.listen.udp=${PORT__OP_NODE_P2P}

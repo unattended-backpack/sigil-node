@@ -16,10 +16,10 @@ geth \
 	--http.vhosts="*" \
 	--http.addr=0.0.0.0 \
 	--http.api=web3,debug,eth,txpool,net,engine,miner \
-	--http.port=${PORT__OP_GETH_HTTP:-8545} \
+	--http.port=${PORT__OP_GETH_HTTP} \
 	--ws \
 	--ws.addr=0.0.0.0 \
-	--ws.port=${PORT__OP_GETH_WS:-8546} \
+	--ws.port=${PORT__OP_GETH_WS} \
 	--ws.origins="*" \
 	--ws.api=web3,debug,eth,txpool,net,engine,miner \
 	--syncmode=full \
@@ -29,6 +29,6 @@ geth \
 	--authrpc.addr=0.0.0.0 \
 	--authrpc.port=8551 \
 	--authrpc.jwtsecret=/shared/jwt.txt \
-	--port=${PORT__OP_GETH_P2P:-30303} \
-	--discovery.port=${PORT__OP_GETH_P2P:-30303} \
+	--port=${PORT__OP_GETH_P2P} \
+	--discovery.port=${PORT__OP_GETH_P2P} \
 	--rollup.disabletxpoolgossip=true
