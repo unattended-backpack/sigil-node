@@ -101,7 +101,7 @@ Reading the output: proof progress is indicated in the `progress` field when the
 
 # Bridging Ether
 
-To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7C61e5BE8e923D2F67d36530FC121aC617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
+To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bridge on Sepolia at `0xf919b7c61e5be8e923d2f67d36530fc121ac617e`.  The Ether you send here will be available at the same address that sent the Ether but on Sigil.
 
 # Check sync progress
 
