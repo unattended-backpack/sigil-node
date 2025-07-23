@@ -121,6 +121,7 @@ Steps:
 
 When a new Contemplant template is pushed to Vast.ai make sure to copy the new template hash from the Vast UI and add it to `scripts/exit/start-magister`, overwriting the old `template_hash`.
 
-When the Sigil team makes changes, make sure to update `.env.maintainer` values and config files in `config`.
+When the Sigil team makes changes, make sure to update `.env.maintainer` values and config files in `config`.  `genesis.json`, `rollup.json`, and `l1-contracts.json` come from the `op-deployer inspect` command.  `51611.json` comes from op-succinct contract deployment.
+                                                                                                                                                                                                           o
 
 ### Inspired by [github.com/smartcontracts/simple-optimism-node](https://github.com/smartcontracts/simple-optimism-node)
