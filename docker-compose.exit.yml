@@ -3,7 +3,6 @@
 services:
   op-node:
     entrypoint: /scripts/exit/start-op-node.sh
-
   op-geth:
     entrypoint: /scripts/exit/start-op-geth.sh
 
@@ -98,7 +97,7 @@ services:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
-  # manages worker nodes who execute proofs for Hierophant
+  # creates contemplant instances on vast.ai who execute proofs for Hierophant
   magister:
     # You're welcome to build your own image and use it here instead: https://github.com/unattended-backpack/magister
     image: jossduff/magister:latest

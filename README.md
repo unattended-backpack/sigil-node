@@ -72,6 +72,7 @@ make exit
 # Stop any time with
 make stop-exit
 # note: some processes like op-node can take awhile (~5 mins) to cleanly shut down
+# IMPORTANT: make sure to manually destroy orphaned vast.ai instances on the vast.ai frontend after stopping
 
 # see Makefile for more commands
 ```
@@ -118,8 +119,6 @@ Steps:
 5. If things still aren't working head to the Sigil discord or open an issue with as many error logs as you can collect over the services.
 
 # Developing & maintaining
-
-When a new Contemplant template is pushed to Vast.ai make sure to copy the new template hash from the Vast UI and add it to `scripts/exit/start-magister`, overwriting the old `template_hash`.
 
 When the Sigil team makes changes, make sure to update `.env.maintainer` values and config files in `config`.  `genesis.json`, `rollup.json`, and `l1-contracts.json` come from the `op-deployer inspect` command.  `51611.json` comes from op-succinct contract deployment.
                                                                                                                                                                                                            o

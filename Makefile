@@ -1,19 +1,19 @@
 # Simple Makefile for Sigil Node
 
 # Start node in foreground
-node:
+node: check-env
 	docker compose -f docker-compose.yml -f docker-compose.node.yml up
 
 # Start node in background
-node-d:
+node-d: check-env
 	docker compose -f docker-compose.yml -f docker-compose.node.yml up -d
 
 # Start exit node in foreground
-exit:
+exit: check-env
 	docker compose -f docker-compose.yml -f docker-compose.exit.yml up
 
 # Start exit node in background
-exit-d:
+exit-d: check-env
 	docker compose -f docker-compose.yml -f docker-compose.exit.yml up -d
 
 # Stop node
@@ -44,3 +44,7 @@ restart-node:
 # Restart node
 restart-exit:
 	docker compose -f docker-compose.yml -f docker-compose.exit.yml restart
+
+check-env:
+	@test -f .env || (echo "Error: .env file not found!" && exit 1)
+
