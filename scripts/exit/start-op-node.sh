@@ -5,7 +5,6 @@ while [ ! -f /shared/initialized.txt ]; do
 	sleep 1
 done
 
-# TODO: only listen to L1
 op-node \
 	--l1=$L1_RPC_URL \
 	--l1.beacon=$L1_BEACON_RPC_URL \
@@ -21,6 +20,8 @@ op-node \
 	--p2p.sequencer.key=$PRIVATE_KEY \
 	--safedb.path=/safedb \
 	--p2p.priv.path=/opnode_p2p_priv/priv.txt \
+	--p2p.peers.lo=100 \
+	--p2p.peers.hi=150 \
 	--p2p.listen.ip=0.0.0.0 \
 	--p2p.listen.tcp=${PORT__OP_NODE_P2P} \
 	--p2p.listen.udp=${PORT__OP_NODE_P2P}
