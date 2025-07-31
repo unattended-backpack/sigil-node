@@ -108,6 +108,24 @@ To bridge Ether to Sigil to interact with the testnet, send funds to Sigil's bri
 
 You can run `progress.sh` to check the current sync progress against the head of `SIGIL_SEQUENCER` rpc set in env.
 
+# Syncing a new testnet
+
+Sigil is young and will have multiple ephemerial testnets.  When we release a new testnet follow these steps:
+
+```bash
+cd sigil-node
+
+# Delete all local data
+make clean
+
+# pull from master branch to get latest changes
+git checkout master
+git pull
+
+# Follow steps above to run exit node or rpc node
+# Your old `.env` might be outdated now.  Make sure to copy the new .env.example
+```
+
 # Troubleshooting
 
 Steps:

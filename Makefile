@@ -34,6 +34,12 @@ logs-exit:
 
 # Clean everything (WARNING: including volumes!  You will lose all chain data and have to resync!)
 clean:
+	@bash -c 'echo -e "\033[33mWARNING: This will delete all chain data and require a re-sync.\033[0m"; \
+	read -p "Are you sure you want to continue? [y/N]: " confirm; \
+	if [ ["$$confirm" != "y"] || [ "$$confirm" = "Y" ] ]; then \
+		echo "Operation cancelled."; \
+		exit 1; \
+	fi'
 	docker compose -f docker-compose.yml -f docker-compose.node.yml down -v
 	docker compose -f docker-compose.yml -f docker-compose.exit.yml down -v
 
