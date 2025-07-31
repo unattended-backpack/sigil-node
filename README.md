@@ -113,11 +113,12 @@ You can run `progress.sh` to check the current sync progress against the head of
 Sigil is young and will have multiple ephemerial testnets.  When we release a new testnet follow these steps:
 
 ```bash
+cd sigil-node
+
 # Delete all local data
 make clean
 
 # pull from master branch to get latest changes
-cd sigil-node
 git checkout master
 git pull
 
