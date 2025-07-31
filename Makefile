@@ -36,7 +36,7 @@ logs-exit:
 clean:
 	@bash -c 'echo -e "\033[33mWARNING: This will delete all chain data and require a re-sync.\033[0m"; \
 	read -p "Are you sure you want to continue? [y/N]: " confirm; \
-	if [ ["$$confirm" != "y"] || [ "$$confirm" = "Y" ] ]; then \
+	if [[ "$$confirm" != "y" && "$$confirm" != "Y" ]]; then \
 		echo "Operation cancelled."; \
 		exit 1; \
 	fi'
